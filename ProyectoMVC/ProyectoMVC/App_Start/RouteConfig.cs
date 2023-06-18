@@ -26,6 +26,11 @@ namespace ProyectoMVC
                 defaults: new { controller = "Descuentos", action = "GeneratePDF" }
 );
 
+            routes.MapRoute(
+               name: "Email",
+               url: "{controller}/{action}/{id}",
+                defaults: new { controller = "email", action = "Email", id = UrlParameter.Optional }
+);
         }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model ProyectoMVC.emailSetup
+
+@{
+    ViewBag.Title = "Email";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Email</h2>
+<div>
+    @using (Html.BeginForm("Index", "emailSetup", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <form method="post" action="enviar_correo.php" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td><strong>Para:</strong></td>
+                    <td>@Html.TextBoxFor(model => Model.to)</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Asunto:</strong></td>
+                    <td>@Html.TextBoxFor(model => Model.subjet)</td>
+                </tr>
+                <tr>
+                    <td><strong>Cuerpo:</strong></td>
+                    <td>@Html.TextAreaFor(model => Model.body, new { rows = "15", column = "25" })</td>
+                </tr>
+                <tr>
+                    <td><strong>Adjunto:</strong></td>
+                    <td><input type="file" name="attachment"></td>
+                </tr>
+            </table>
+
+            <br>
+            <input type="submit" value="Enviar">
+        </form>
+    }
+
+</div>
+
