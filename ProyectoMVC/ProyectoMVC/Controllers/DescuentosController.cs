@@ -53,11 +53,20 @@ namespace ProyectoMVC.Controllers
 
 
        
-        public ActionResult GeneratePDF()
+        public ActionResult GeneratePDF(int? id)
         {
             // Lógica adicional para preparar datos, si es necesario
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Descuentos descuentos = db.Descuentos.Find(id);
+            if (descuentos == null)
+            {
+                return HttpNotFound();
+            }
 
-            return new ViewAsPdf("Details")
+            return new ViewAsPdf("Details", "~/Views/Shared/_Layout.cshtml", descuentos)
             {
                 FileName = "carta.pdf" // Establece el nombre del archivo PDF
              };

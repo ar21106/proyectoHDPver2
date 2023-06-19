@@ -75,7 +75,8 @@ namespace ProyectoMVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.paises = new SelectList(db.pais, "idPais", "nomPais", empleados.pais);
+            ViewBag.paises = new SelectList(db.pais, "idPais", "nomPais");
+            ViewBag.cargos = new SelectList(db.cargos, "id", "cargo");
             return View(empleados);
         }
 
@@ -84,7 +85,7 @@ namespace ProyectoMVC.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idEmpleado,nombres,cargo,fechaIngreso,salario,email,pais,logo")] Empleados empleados)
+        public ActionResult Edit([Bind(Include = "idEmpleado,pais,nombre,apellido,fechaIngreso,cargo,salario,email")] Empleados empleados)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +93,8 @@ namespace ProyectoMVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.pais = new SelectList(db.pais, "idPais", "nomPais", empleados.pais);
+            ViewBag.paises = new SelectList(db.pais, "idPais", "nomPais");
+            ViewBag.cargos = new SelectList(db.cargos, "id", "cargo");
             return View(empleados);
         }
 

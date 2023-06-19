@@ -5,67 +5,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Carta de Retencion</h2>
+<div>
+    <img src="~/images/logo.png" alt="crazy-lola" border="0" style="width:300px;height:100px;">
+</div>
+<br />
 
-
-    <div>San Salvador 11 de junio de 2023</div>
-    <br />
-    <br />
-    <div class="card" style="width: 100%;">
-        <div class="card-header">
-            Señores<br />
-            Dirección General de Impuestos Internos<br />
-            Ministerio de Hacienda<br />
-            Presente
-        </div>
-       </div>
-        <hr />
-        <div>
-            Por medio de la presente hacemos constar que al contribuyente: @Html.DisplayFor(model => model.Empleados.nombres),
-            recibió los pagos y a la vez se le realizó las siguientes deducciones durante el ejercicio del 1 de enero al 31 de diciembre de 2022.
-        </div>
-        <hr />
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="container-box">
-                        isss<br />
-                        afp<br />
-                        renta<br />
-                        otros descuentos
-                        <hr />
-
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="container-box">
-                        @Html.DisplayFor(model => model.isss)<br />
-                        @Html.DisplayFor(model => model.afp)<br />
-                        @Html.DisplayFor(model => model.renta)<br />
-                        @Html.DisplayFor(model => model.otros)
-                        <hr />
-
-                    </div>
+<div>San Salvador 11 de junio de 2023</div>
+<br />
+<br />
+<div class="card" style="width: 100%;">
+    <div class="card-header">
+        Señores<br />
+        Dirección General de Impuestos Internos<br />
+        Ministerio de Hacienda<br />
+        Presente
+    </div>
+</div>
+<hr />
+<div>
+    Por medio de la presente hacemos constar que al contribuyente: @Html.DisplayFor(model => model.Empleados.nombre) @Html.DisplayFor(model => model.Empleados.apellido),
+    recibió los pagos y a la vez se le realizó las siguientes deducciones durante el ejercicio del 1 de enero al 31 de diciembre de @Html.DisplayFor(model => model.Periodo.Year)
+</div>
+<hr />
+<table class="table" >
+    <tr>
+        <td>ISR: </td>
+        <td>@Html.DisplayFor(model => model.isss)</td>
+    </tr>
+    <tr>
+        <td>ISSS: </td>
+        <td>@Html.DisplayFor(model => model.isss)</td>
+    </tr>
+    <tr>
+        <td>AFP: </td>
+        <td>@Html.DisplayFor(model => model.afp)</td>
+    </tr>
+    <tr>
+        <td>Otros descuentos: </td>
+        <td> @Html.DisplayFor(model => model.otros)</td>
+    </tr>
+</table>
+@*<div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="container-box">
+                    isss: @Html.DisplayFor(model => model.isss)<br />
+                    afp: @Html.DisplayFor(model => model.afp)<br />
+                    renta: @Html.DisplayFor(model => model.renta)<br />
+                    otros descuentos: @Html.DisplayFor(model => model.otros)
+                    <hr />
 
                 </div>
             </div>
         </div>
-        <div>
+</div>*@
+    <div>
 
             Y para efectos de su declaración de impuesto sobre la renta, se extiende la presente, en la ciudad de
             San Salvador, a los quince días del mes de marzo del dos mil veintitrés.<br />
-            <hr />
+<hr />
             Atentamente,<br />
         </div>
-        <hr />
-        <p>
-            Departamento de Recursos Humanos<br />
-            Crazy Cola
-        </p>
-        <hr />
-        <hr />
-        <p>
-            @Html.ActionLink("Generar PDF", "GeneratePDF", "Descuentos")|
-            @Html.ActionLink("Enviar Email", "Email", "email")|
-            @Html.ActionLink("Volver", "Index")
-        </p>
+<hr />
+<p>
+    Departamento de Recursos Humanos<br />
+    Crazy Lola
+</p>
+<hr />
+<hr />
+<p>
+    @Html.ActionLink("Generar PDF", "GeneratePDF", new { id = Model.idRetenciones }, null) |  
+    @Html.ActionLink("Volver", "Index")
+</p>

@@ -1,39 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PlanillaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cargos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="cargo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Descuentos">
     <Key>
       <PropertyRef Name="idRetenciones" />
     </Key>
     <Property Name="idRetenciones" Type="int" Nullable="false" />
-    <Property Name="idEmpleado" Type="int" />
-    <Property Name="renta" Type="money" />
-    <Property Name="isss" Type="money" />
-    <Property Name="afp" Type="money" />
-    <Property Name="otros" Type="money" />
-    <Property Name="Periodo" Type="datetime" />
+    <Property Name="idEmpleado" Type="int" Nullable="false" />
+    <Property Name="renta" Type="money" Nullable="false" />
+    <Property Name="isss" Type="money" Nullable="false" />
+    <Property Name="afp" Type="money" Nullable="false" />
+    <Property Name="otros" Type="money" Nullable="false" />
+    <Property Name="Periodo" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Empleados">
     <Key>
       <PropertyRef Name="idEmpleado" />
     </Key>
     <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nombres" Type="varchar" MaxLength="150" Nullable="false" />
-    <Property Name="cargo" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="fechaIngreso" Type="datetime" Nullable="false" />
-    <Property Name="salario" Type="money" />
-    <Property Name="email" Type="varchar" MaxLength="100" />
-    <Property Name="pais" Type="int" />
-    <Property Name="logo" Type="varchar" MaxLength="150" />
+    <Property Name="cargo" Type="int" Nullable="false" />
+    <Property Name="fechaIngreso" Type="date" Nullable="false" />
+    <Property Name="salario" Type="money" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="pais" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="pais">
     <Key>
       <PropertyRef Name="idPais" />
     </Key>
     <Property Name="idPais" Type="int" Nullable="false" />
-    <Property Name="nomPais" Type="varchar" MaxLength="50" />
+    <Property Name="nomPais" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="telefono" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="logo" Type="varchar" MaxLength="100" />
+    <Property Name="razon_social" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Empleados_cargos">
+    <End Role="cargos" Type="Self.cargos" Multiplicity="1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cargos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_idRetEmpleado">
-    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
     <End Role="Descuentos" Type="Self.Descuentos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Empleados">
@@ -45,7 +68,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_paisResidencia">
-    <End Role="pais" Type="Self.pais" Multiplicity="0..1" />
+    <End Role="pais" Type="Self.pais" Multiplicity="1" />
     <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="pais">
@@ -57,9 +80,14 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="PlanillaModelStoreContainer">
+    <EntitySet Name="cargos" EntityType="Self.cargos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Descuentos" EntityType="Self.Descuentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pais" EntityType="Self.pais" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Empleados_cargos" Association="Self.FK_Empleados_cargos">
+      <End Role="cargos" EntitySet="cargos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
     <AssociationSet Name="fk_idRetEmpleado" Association="Self.fk_idRetEmpleado">
       <End Role="Empleados" EntitySet="Empleados" />
       <End Role="Descuentos" EntitySet="Descuentos" />

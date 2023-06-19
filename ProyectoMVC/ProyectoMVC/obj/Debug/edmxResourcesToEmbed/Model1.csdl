@@ -5,12 +5,12 @@
       <PropertyRef Name="idRetenciones" />
     </Key>
     <Property Name="idRetenciones" Type="Int32" Nullable="false" />
-    <Property Name="idEmpleado" Type="Int32" />
-    <Property Name="renta" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="isss" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="afp" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="otros" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="Periodo" Type="DateTime" Precision="3" />
+    <Property Name="idEmpleado" Type="Int32" Nullable="false" />
+    <Property Name="renta" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="isss" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="afp" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="otros" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Periodo" Type="DateTime" Precision="3" Nullable="false" />
     <NavigationProperty Name="Empleados" Relationship="Self.fk_idRetEmpleado" FromRole="Descuentos" ToRole="Empleados" />
   </EntityType>
   <EntityType Name="Empleados">
@@ -18,26 +18,31 @@
       <PropertyRef Name="idEmpleado" />
     </Key>
     <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="salario" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="pais" Type="Int32" />
-    <Property Name="logo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="cargo" Type="Int32" Nullable="false" />
+    <Property Name="fechaIngreso" Type="DateTime" Nullable="false" />
+    <Property Name="salario" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pais" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Descuentos" Relationship="Self.fk_idRetEmpleado" FromRole="Empleados" ToRole="Descuentos" />
     <NavigationProperty Name="pais1" Relationship="Self.fk_paisResidencia" FromRole="Empleados" ToRole="pais" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cargos" Relationship="PlanillaModel.FK_Empleados_cargos" FromRole="Empleados" ToRole="cargos" />
   </EntityType>
   <EntityType Name="pais">
     <Key>
       <PropertyRef Name="idPais" />
     </Key>
     <Property Name="idPais" Type="Int32" Nullable="false" />
-    <Property Name="nomPais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nomPais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Empleados" Relationship="Self.fk_paisResidencia" FromRole="pais" ToRole="Empleados" />
+    <Property Name="direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="logo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="razon_social" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="fk_idRetEmpleado">
-    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
     <End Role="Descuentos" Type="Self.Descuentos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Empleados">
@@ -49,7 +54,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_paisResidencia">
-    <End Role="pais" Type="Self.pais" Multiplicity="0..1" />
+    <End Role="pais" Type="Self.pais" Multiplicity="1" />
     <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="pais">
@@ -72,5 +77,30 @@
       <End Role="pais" EntitySet="pais" />
       <End Role="Empleados" EntitySet="Empleados" />
     </AssociationSet>
+    <EntitySet Name="cargos" EntityType="PlanillaModel.cargos" />
+    <AssociationSet Name="FK_Empleados_cargos" Association="PlanillaModel.FK_Empleados_cargos">
+      <End Role="cargos" EntitySet="cargos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="cargos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="PlanillaModel.FK_Empleados_cargos" FromRole="cargos" ToRole="Empleados" />
+  </EntityType>
+  <Association Name="FK_Empleados_cargos">
+    <End Type="PlanillaModel.cargos" Role="cargos" Multiplicity="1" />
+    <End Type="PlanillaModel.Empleados" Role="Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cargos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

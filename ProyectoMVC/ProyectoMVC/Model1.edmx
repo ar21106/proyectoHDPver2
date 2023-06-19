@@ -30,7 +30,7 @@
           </Key>
           <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cargo" Type="int" Nullable="false" />
-          <Property Name="fechaIngreso" Type="datetime" Nullable="false" />
+          <Property Name="fechaIngreso" Type="date" Nullable="false" />
           <Property Name="salario" Type="money" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="pais" Type="int" Nullable="false" />
@@ -125,7 +125,7 @@
           </Key>
           <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cargo" Type="Int32" Nullable="false" />
-          <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaIngreso" Type="DateTime" Nullable="false" />
           <Property Name="salario" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="pais" Type="Int32" Nullable="false" />

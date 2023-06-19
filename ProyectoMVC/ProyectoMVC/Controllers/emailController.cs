@@ -19,11 +19,11 @@ namespace ProyectoMVC.Controllers
         }
 
 
-        public ActionResult Email(ProyectoMVC.emailSetup model)
+        public ActionResult Email()
         {
-            MailMessage mail = new MailMessage("email que envia", model.to);
-            mail.Subject = model.subjet;
-            mail.Body = model.body;
+            MailMessage mail = new MailMessage("proyectohdp730@gmail.com", "ar21106@ues.edu.sv");
+            mail.Subject = "CARTA DE RENTA";
+            mail.Body = "ESTA ES SU CARTA DE RENTA";
             mail.IsBodyHtml = false;
 
             SmtpClient smpt = new SmtpClient();
@@ -31,7 +31,7 @@ namespace ProyectoMVC.Controllers
             smpt.Port = 587;
             smpt.EnableSsl = true;
 
-            NetworkCredential nc = new NetworkCredential("email que envia", "clave email");
+            NetworkCredential nc = new NetworkCredential("proyectohdp730@gmail.com", "proyectoHDP123");
             smpt.UseDefaultCredentials = true;
             smpt.Credentials = nc;
             smpt.Send(mail);

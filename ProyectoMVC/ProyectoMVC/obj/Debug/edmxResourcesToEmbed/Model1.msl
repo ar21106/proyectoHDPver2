@@ -17,22 +17,34 @@
     <EntitySetMapping Name="Empleados">
       <EntityTypeMapping TypeName="PlanillaModel.Empleados">
         <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
-          <ScalarProperty Name="nombres" ColumnName="nombres" />
           <ScalarProperty Name="cargo" ColumnName="cargo" />
           <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
           <ScalarProperty Name="salario" ColumnName="salario" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="pais" ColumnName="pais" />
-          <ScalarProperty Name="logo" ColumnName="logo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="pais">
       <EntityTypeMapping TypeName="PlanillaModel.pais">
         <MappingFragment StoreEntitySet="pais">
+          <ScalarProperty Name="razon_social" ColumnName="razon_social" />
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="idPais" ColumnName="idPais" />
           <ScalarProperty Name="nomPais" ColumnName="nomPais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cargos">
+      <EntityTypeMapping TypeName="PlanillaModel.cargos">
+        <MappingFragment StoreEntitySet="cargos">
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
