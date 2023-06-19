@@ -12,20 +12,16 @@ namespace ProyectoMVC
     using System;
     using System.Collections.Generic;
     
-    public partial class pais
+    public partial class cargos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public pais()
+        public cargos()
         {
             this.Empleados = new HashSet<Empleados>();
         }
     
-        public int idPais { get; set; }
-        public string nomPais { get; set; }
-        public string direccion { get; set; }
-        public string telefono { get; set; }
-        public string logo { get; set; }
-        public string razon_social { get; set; }
+        public int id { get; set; }
+        public string cargo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleados> Empleados { get; set; }

@@ -28,5 +28,6 @@ namespace ProyectoMVC
         public virtual DbSet<Descuentos> Descuentos { get; set; }
         public virtual DbSet<Empleados> Empleados { get; set; }
         public virtual DbSet<pais> pais { get; set; }
+        public virtual DbSet<cargos> cargos { get; set; }
     }
 }

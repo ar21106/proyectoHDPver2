@@ -39,7 +39,8 @@ namespace ProyectoMVC.Controllers
         // GET: Empleados/Create
         public ActionResult Create()
         {
-            ViewBag.pais = new SelectList(db.pais, "idPais", "nomPais");
+            ViewBag.paises = new SelectList(db.pais, "idPais", "nomPais");
+            ViewBag.cargos = new SelectList(db.cargos, "id", "cargo");
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace ProyectoMVC.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idEmpleado,nombres,cargo,fechaIngreso,salario,email,pais,logo")] Empleados empleados)
+        public ActionResult Create([Bind(Include = "idEmpleado,pais,nombre,apellido,fechaIngreso,cargo,salario,email")] Empleados empleados)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +58,8 @@ namespace ProyectoMVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.pais = new SelectList(db.pais, "idPais", "nomPais", empleados.pais);
+            ViewBag.paises = new SelectList(db.pais, "idPais", "nomPais");
+            ViewBag.cargos = new SelectList(db.cargos, "id", "cargo");
             return View(empleados);
         }
 
@@ -73,7 +75,7 @@ namespace ProyectoMVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.pais = new SelectList(db.pais, "idPais", "nomPais", empleados.pais);
+            ViewBag.paises = new SelectList(db.pais, "idPais", "nomPais", empleados.pais);
             return View(empleados);
         }
 
