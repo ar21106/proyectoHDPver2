@@ -21,16 +21,17 @@ namespace ProyectoMVC
         }
     
         public int idEmpleado { get; set; }
-        public string nombres { get; set; }
-        public string cargo { get; set; }
+        public int cargo { get; set; }
         public System.DateTime fechaIngreso { get; set; }
-        public Nullable<decimal> salario { get; set; }
+        public decimal salario { get; set; }
         public string email { get; set; }
-        public Nullable<int> pais { get; set; }
-        public string logo { get; set; }
+        public int pais { get; set; }
+        public string nombre { get; set; }
+        public string apellido { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Descuentos> Descuentos { get; set; }
         public virtual pais pais1 { get; set; }
+        public virtual cargos cargos { get; set; }
     }
 }

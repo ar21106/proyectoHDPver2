@@ -15,12 +15,12 @@ namespace ProyectoMVC
     public partial class Descuentos
     {
         public int idRetenciones { get; set; }
-        public Nullable<int> idEmpleado { get; set; }
-        public Nullable<decimal> renta { get; set; }
-        public Nullable<decimal> isss { get; set; }
-        public Nullable<decimal> afp { get; set; }
-        public Nullable<decimal> otros { get; set; }
-        public Nullable<System.DateTime> Periodo { get; set; }
+        public int idEmpleado { get; set; }
+        public decimal renta { get; set; }
+        public decimal isss { get; set; }
+        public decimal afp { get; set; }
+        public decimal otros { get; set; }
+        public System.DateTime Periodo { get; set; }
     
         public virtual Empleados Empleados { get; set; }
     }
